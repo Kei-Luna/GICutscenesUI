@@ -10,7 +10,6 @@
 	<script src="scripts/settings.js" defer></script>
 	<script src="scripts/console.js" defer></script>
 	<script src="scripts/about.js" defer></script>
-	<script src="scripts/main.js" defer></script>
 </head>
 <body>
 
@@ -25,6 +24,7 @@
 	<div class="tabcontent showed" id="home">
 		<h2 translation="__select_files_dots__">Select Files:</h2>
 		<button id="fileSelector" class="browse" onclick="selectFiles()" translation="__select_files__">Select Files</button>
+		<button id="fileCleaner" class="browse" onclick="clearFiles()" translation="__clear_files__" style="display:none;">Clear</button>
 		<details id="preview_zone" open>
 			<summary></summary>
 		</details>
@@ -33,7 +33,9 @@
 			<progress id="progress_bar"></progress>
 			<span id="current_progress">0/0</span>
 			<span id="current_work"></span>
-			<div id="current_work_file"></div>
+
+			<progress id="ffmpeg_progress" min="0" max="100" value="0" style="display:none"></progress>
+			<span id="ffmpeg_progress_text" style="display:none; font-size: 0.8em;">0%</span>
 
 			<div id="console_wrapper">
 				<textarea id="output" cols="30" rows="10" readonly></textarea>
@@ -43,7 +45,10 @@
 			<button onclick="openOutputFolder()"  translation="__open_output_dir__" class="browse" id="open_dir">Open Output Dir</button>
 		</div>
 
-		<button onclick="start()" id="start" translation="__start__">START</button>
+		<div id="start_area">
+			<button onclick="stop()" id="stop" translation="__stop__" style="display:none;">STOP</button>
+			<button onclick="start()" id="start" translation="__start__">START</button>
+		</div>
 	</div>
 
 
@@ -76,6 +81,10 @@
 						<option value="uk">Українська</option>
 						<option value="zh-hans">简体中文</option>
 						<option value="zh-hant">繁體中文</option>
+						<option value="id">Indonesian</option>
+						<option value="fr">Français</option>
+						<option value="vi">Tiếng Việt</option>
+						<option value="kr">한국인</option>
 					</select>
 				</div>
 				
@@ -105,7 +114,10 @@
 				<option value="2">Audio 2 - Japanese</option>
 				<option value="3">Audio 3 - Korean</option>
 			</select>
-
+		</p>
+		<p>
+			<input type="checkbox" id="delete_after_merge" name="delete_after_merge" class="settings_element">
+			<label for="delete_after_merge" translation="__delete_after_merge__">Delete unnecessary files after merging</label>
 		</p>
 	</div>
 
@@ -130,6 +142,11 @@
 					<tr>
 						<td><a href="https://github.com/ToaHartor/GI-cutscenes" target="_blank" class="link">GI-cutscenes</a>:</td>
 						<td><code class="version" id="script_ver"></code></td>
+					</tr>
+					<tr id="compare_ver_files_line" style="display:none;">
+						<td>↳<a href="https://raw.githubusercontent.com/ToaHartor/GI-cutscenes/main/versions.json" target="_blank" class="link">
+							<code style="margin-left:5px">version.json</code></a>:
+						</td><td><code class="version" id="ver_file_status"></code></td>
 					</tr>
 					<tr>
 						<td>Ffmpeg version:</td>
@@ -172,9 +189,27 @@
 					<td>Traditional Chinese:</td>
 					<td><a href="https://github.com/zhxycn" class="link" target="_blank">zhxycn</a></td>
 				</tr>
+				<tr>
+					<td>Indonesian:</td>
+					<td><a href="https://github.com/GID0317" class="link" target="_blank">GID</a></td>
+				</tr>
+				<tr>
+					<td>French:</td>
+					<td><a href="https://github.com/ToaHartor" class="link" target="_blank">ToaHartor</a></td>
+				</tr>
+				<tr>
+					<td>Vietnamese:</td>
+					<td><a href="https://github.com/phuchptty" class="link" target="_blank">Lucas</a></td>
+				</tr>
+				<tr>
+					<td>Korean:</td>
+					<td><a href="https://www.instagram.com/s_w_yun/" class="link" target="_blank">yunsungwook</a></td>
+				</tr>
 			</table>
 		</fieldset>
 	</div>
 
+
+<script src="scripts/main.js" defer></script>
 </body>
 </html>

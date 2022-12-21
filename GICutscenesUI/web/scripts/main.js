@@ -1,4 +1,4 @@
-window.onload = async _=>{
+(async _=>{
 	await load_settings()
 	changeTheme()
 	getTranslation()
@@ -11,7 +11,7 @@ window.onload = async _=>{
 	let folder = await eel.get_script_file()();
 	update_path(folder, document.getElementById("script_path"))
 	get_output_folder()
-}
+})()
 
 function openTab(tab){
 	window.location.hash = tab
@@ -29,7 +29,10 @@ function openTab(tab){
 async function change_script_folder(){
 	var folder = await eel.ask_script_file()();
 	update_path(folder, document.getElementById("script_path"))
-	allow_reload_info()
+	
+	if (document.getElementById("script_path").value != folder){
+		allow_reload_info()
+	}
 }
 function update_path(path, input){
 	if (path){
@@ -50,10 +53,26 @@ async function selectFiles(){
 	}
 }
 function updatePreview(files){
+	removeIcons_and_color()
+	let preview = document.getElementById("preview_zone")
+	files.forEach(e=>{
+		if (!preview.querySelector(`div[path='${e}']`)){
+			preview.innerHTML += `<div path='${e}'>${e.replace(/^.*[\\\/]/, '')}</div>`
+		}
+	})
+	document.getElementById("fileCleaner").style.display = "inline-block"
+}
+function clearFiles(){
 	let preview = document.getElementById("preview_zone")
 	preview.innerHTML = '<summary></summary>'
-	files.forEach(e=>{
-		preview.innerHTML += `<div path='${e}'>${e.replace(/^.*[\\\/]/, '')}</div>`
+	document.getElementById("fileCleaner").style.display = "none"
+}
+
+function removeIcons_and_color(){
+	Array.from(document.getElementById("preview_zone").getElementsByTagName("div")).forEach(e=>{
+		e.className = ""
+		let icon = e.querySelector(".icon")
+		if (icon){icon.remove()}
 	})
 }
 
@@ -71,6 +90,8 @@ async function start(){
 		})
 
 		if (files.length > 0){
+			clearConsole()
+			removeIcons_and_color()
 			if (document.getElementById("script_path").value){
 				// MAIN CALL
 				let settings = parseSettings()
@@ -89,4 +110,9 @@ async function start(){
 			alert(LANG("no_files"))
 		}
 	}
+}
+
+async function stop(){
+	document.getElementById("stop").disabled = true;
+	eel.stop_work()();
 }

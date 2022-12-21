@@ -1,0 +1,48 @@
+{
+	"__root__": {
+		"inherit": "en"
+	},
+	"home": "Utama",
+	"settings": "Pengaturan",
+	"select_files": "Tambahkan Berkas",
+	"select_files_dots": "Pilih Berkas:",
+	"clear_files": "Bersihkan",
+	"version": "Versi:",
+	"about": "Tentang",
+	"translations": "Terjemahan:",
+
+	"change": "Ubah",
+	"reset": "Setel Ulang",
+	"reset_title": "Hapus Berkas Pengaturan",
+	"save": "Simpan",
+	"save": "Simpan Pengaturan ke Berkas",
+	"language": "Bahasa:",
+	"output_folder": "Folder Akhir:",
+	"merge": "Gabungkan Video dan Audio",
+	"delete_after_merge": "Hapus berkas tidak penting setelah penggabungan",
+	"clear": "🗑Bersihkan",
+	"start": "Mulai",
+	"stop": "BERHENTI",
+	"appearance": "Tampilan",
+	"theme": "Tema:",
+	"light": "Terang",
+	"dark": "Gelap",
+
+	"no_files": "Berkas Kosong!",
+	"select_script_file": "Pilih Berkas Script!",
+	"saved": "Tersimpan!",
+	"confirm_delete_settings": "Apakah Anda Yakin Ingin Menghapus Semua Pengaturan?",
+
+	"using_ffmpeg_promt": "Memakai ffmpeg",
+	"track_index_promt": "Index Track",
+
+	"copy_files": "Menyalin Berkas...",
+	"run_demux": "Mengkonversi dan Mendekripsi...",
+	"rename_files": "Menamai Berkas...",
+	"run_merge": "Menggabungkan Video dan Audio...",
+	"open_output_dir": "Buka Folder Akhir",
+	"stopped": "Terhenti",
+
+	"new_update": "Pembaruan Baru!",
+	"update": "Perbarui"
+}
